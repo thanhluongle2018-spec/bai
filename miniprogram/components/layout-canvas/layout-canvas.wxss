@@ -1,0 +1,11 @@
+.wrap { padding: 24rpx; display: flex; flex-direction: column; align-items: center; }
+.canvas {
+  background: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(26, 43, 60, 0.12);
+}
+.warn {
+  margin-top: 16rpx;
+  color: #c0392b;
+  font-size: 24rpx;
+  text-align: center;
+}

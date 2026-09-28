@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="hero">
+    <view class="brand">证件照工具</view>
+    <view class="tagline">上传一张照片，快速生成标准证件照</view>
+    <view class="cta btn-primary" bindtap="onChoose">选择或拍摄照片</view>
+  </view>
+
+  <view class="actions">
+    <view class="action" bindtap="openSizesHint">常用尺寸</view>
+    <view
+      wx:if="{{enablePrint}}"
+      class="action"
+      bindtap="goLayout"
+    >打印排版</view>
+    <view
+      wx:if="{{enableAdmin && isAdmin}}"
+      class="action"
+      bindtap="goAdmin"
+    >管理后台</view>
+  </view>
+
+  <view class="legal">
+    <navigator url="/pages/user-agreement/user-agreement" class="link">用户协议</navigator>
+    <text class="sep">·</text>
+    <navigator url="/pages/privacy-policy/privacy-policy" class="link">隐私政策</navigator>
+    <text class="sep">·</text>
+    <navigator url="/pages/disclaimer/disclaimer" class="link">免责声明</navigator>
+  </view>
+
+  <view class="sync" wx:if="{{syncLabel}}">{{syncLabel}}</view>
+</view>

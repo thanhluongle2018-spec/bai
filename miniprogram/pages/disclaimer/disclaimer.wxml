@@ -1,0 +1,13 @@
+<scroll-view scroll-y class="page">
+  <view class="title">免责声明</view>
+  <view class="meta">更新日期：2026-09-28</view>
+  <view class="p">本工具使用腾讯云人体分析进行 AI 抠图与证件照合成，结果仅供参考。</view>
+  <view class="h">一、结果准确性</view>
+  <view class="p">不同机构对证件照尺寸、背景、着装、头部占比等要求不同。AI 抠图可能出现边缘锯齿、发丝残留或误分割等情况，请务必人工核对后再用于正式提交。</view>
+  <view class="h">二、第三方服务</view>
+  <view class="p">腾讯云 API、微信云开发、广告组件等第三方服务的可用性、计费与政策变化不在本工具完全控制范围内。额度耗尽、限频、欠费停服或接口变更可能导致功能不可用。</view>
+  <view class="h">三、责任限制</view>
+  <view class="p">因使用或无法使用本服务导致的直接或间接损失（包括但不限于报名失败、签证延误等），在法律允许范围内，运营方不承担责任。</view>
+  <view class="h">四、用户内容</view>
+  <view class="p">您对上传图片的合法性与权利完整性负责。请勿上传未成年人敏感内容或侵犯他人权益的材料。</view>
+</scroll-view>

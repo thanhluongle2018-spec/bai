@@ -1,0 +1,10 @@
+<view class="form">
+  <view class="field"><text>尺寸版本号 sizesVersion</text><input type="number" value="{{form.sizesVersion}}" data-k="sizesVersion" bindinput="onInput" /></view>
+  <view class="switch-row"><text>打印排版开关</text><switch checked="{{form.enablePrintLayout}}" data-k="enablePrintLayout" bindchange="onSwitch" /></view>
+  <view class="switch-row"><text>AI 水印开关</text><switch checked="{{form.enableAiWatermark}}" data-k="enableAiWatermark" bindchange="onSwitch" /></view>
+  <view class="field"><text>渐变起点 (0–1，一期默认 0.7)</text><input type="digit" value="{{form.gradientStart}}" data-k="gradientStart" bindinput="onInput" /></view>
+  <view class="field"><text>渐变过渡 (0–1，一期默认 0.15)</text><input type="digit" value="{{form.gradientRange}}" data-k="gradientRange" bindinput="onInput" /></view>
+  <view class="note">仅公开非敏感配置；密钥绝不会通过本接口返回。</view>
+  <view class="err" wx:if="{{error}}">{{error}}</view>
+  <view class="btn-primary" bindtap="onSubmit">{{submitting?'提交中…':'保存公开配置'}}</view>
+</view>

@@ -1,0 +1,60 @@
+.crop-root {
+  width: 100%;
+}
+
+.stage {
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #0e1620;
+}
+
+.source {
+  position: absolute;
+}
+
+.mask {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.45);
+}
+
+.box {
+  position: absolute;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,0.35) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.35) 1px, transparent 1px);
+  background-size: 33.33% 33.33%;
+  pointer-events: none;
+}
+
+.handle {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #c45c26;
+  border: 2px solid #fff;
+  border-radius: 2px;
+  z-index: 3;
+}
+
+.handle.tl { left: -9px; top: -9px; }
+.handle.tr { right: -9px; top: -9px; }
+.handle.bl { left: -9px; bottom: -9px; }
+.handle.br { right: -9px; bottom: -9px; }
+
+.hint {
+  margin-top: 16rpx;
+  text-align: center;
+  color: #5a6b7c;
+  font-size: 24rpx;
+}

@@ -1,0 +1,16 @@
+.page { min-height: 100vh; background: #f0f3f7; padding-bottom: 140rpx; }
+.banner {
+  background: #1a2b3c;
+  color: #fff;
+  padding: 20rpx 28rpx;
+  font-size: 24rpx;
+  line-height: 1.5;
+}
+.toolbar { padding: 24rpx; }
+.size-label { margin-top: 12rpx; color: #5a6b7c; font-size: 24rpx; }
+.footer {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  padding: 20rpx 32rpx;
+  background: rgba(240,243,247,0.96);
+}
+.disabled { opacity: 0.4; pointer-events: none; }

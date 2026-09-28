@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "openapi": []
+  },
+  "timeout": 60,
+  "memorySize": 512,
+  "envVariables": {
+    "CUTOUT_SECRET_ID": "",
+    "CUTOUT_SECRET_KEY": "",
+    "CUTOUT_REGION": "ap-guangzhou"
+  }
+}

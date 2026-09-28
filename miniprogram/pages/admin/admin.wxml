@@ -1,0 +1,32 @@
+<view class="page">
+  <view wx:if="{{authState==='loading'}}" class="state">鉴权中…</view>
+  <view wx:elif="{{authState==='denied'}}" class="state deny">无管理员权限。前端隐藏入口不算鉴权；所有写操作由云函数逐次校验。</view>
+
+  <block wx:elif="{{authState==='ok'}}">
+    <view class="tabs">
+      <view class="tab {{tab==='sizes'?'on':''}}" data-tab="sizes" bindtap="switchTab">尺寸管理</view>
+      <view class="tab {{tab==='config'?'on':''}}" data-tab="config" bindtap="switchTab">公开配置</view>
+    </view>
+
+    <block wx:if="{{tab==='sizes'}}">
+      <view class="toolbar">
+        <input class="search" placeholder="搜索" value="{{keyword}}" bindinput="onSearch" />
+        <view class="btn-ghost" bindtap="onCreate">新建</view>
+      </view>
+      <view class="item" wx:for="{{list}}" wx:key="_id" bindtap="onEdit" data-id="{{item._id}}">
+        <view class="name">{{item.name}} <text class="badge" wx:if="{{!item.enabled}}">停用</text></view>
+        <view class="meta">{{item.category}} · {{item.pxWidth}}×{{item.pxHeight}} · sort {{item.sort}}</view>
+      </view>
+      <view wx:if="{{editing}}" class="drawer">
+        <admin-size-form value="{{editing}}" bind:submit="onSaveSize" />
+        <view class="btn-ghost" bindtap="closeEdit">关闭</view>
+      </view>
+    </block>
+
+    <block wx:if="{{tab==='config'}}">
+      <admin-config-form value="{{config}}" bind:submit="onSaveConfig" />
+    </block>
+
+    <view class="toast" wx:if="{{msg}}">{{msg}}</view>
+  </block>
+</view>

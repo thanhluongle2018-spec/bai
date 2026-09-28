@@ -1,0 +1,18 @@
+<view class="page">
+  <view class="title">隐私授权说明</view>
+  <view class="body">
+    为生成证件照，我们需要访问您选择的相册或相机图片，并将图片上传至微信云开发云存储，随后由云函数调用腾讯云人体分析（SegmentPortraitPic）进行 AI 抠图。结果可能短期缓存在云端以便重复使用。我们不会在前端存储或暴露任何腾讯云密钥。
+  </view>
+  <view class="body">
+    详细说明请阅读
+    <navigator url="/pages/privacy-policy/privacy-policy" class="link">《隐私政策》</navigator>。
+    请同步在微信公众平台配置《小程序用户隐私保护指引》，声明图片上传、云存储、腾讯云人体分析与相册保存等用途。
+  </view>
+  <button
+    class="btn-primary agree"
+    id="agree-btn"
+    open-type="agreePrivacyAuthorization"
+    bindagreeprivacyauthorization="onAgree"
+  >同意并继续</button>
+  <view class="btn-ghost deny" bindtap="onDeny">拒绝</view>
+</view>

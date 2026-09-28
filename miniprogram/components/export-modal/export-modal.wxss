@@ -1,0 +1,75 @@
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 22, 32, 0.55);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sheet {
+  width: 100%;
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  padding: 40rpx 36rpx calc(40rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: 700;
+  font-family: "Songti SC", Georgia, serif;
+}
+
+.desc, .ai-note {
+  margin-top: 16rpx;
+  color: #5a6b7c;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.link {
+  color: #c45c26;
+  text-decoration: underline;
+}
+
+.status {
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  color: #1a2b3c;
+}
+
+.err {
+  margin-top: 12rpx;
+  color: #c0392b;
+  font-size: 24rpx;
+}
+
+.actions {
+  margin-top: 32rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.btn {
+  text-align: center;
+  padding: 22rpx;
+  border-radius: 8rpx;
+  font-size: 28rpx;
+}
+
+.btn.primary {
+  background: #1a2b3c;
+  color: #fff;
+}
+
+.btn.primary.disabled {
+  opacity: 0.45;
+}
+
+.btn.ghost {
+  border: 2rpx solid #d5dde6;
+  color: #1a2b3c;
+}

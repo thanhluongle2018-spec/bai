@@ -1,0 +1,25 @@
+<view class="settings">
+  <view class="block">
+    <view class="label">纸张</view>
+    <view class="row">
+      <view class="chip {{paperId==='A4'?'on':''}}" data-id="A4" bindtap="onPaper">A4 2480×3508</view>
+      <view class="chip {{paperId==='R4'?'on':''}}" data-id="R4" bindtap="onPaper">6寸4R 1800×1200</view>
+    </view>
+  </view>
+  <view class="block">
+    <view class="label">布局</view>
+    <view class="row">
+      <view class="chip {{layoutMode==='preset'?'on':''}}" data-mode="preset" bindtap="onMode">预设网格</view>
+      <view class="chip {{layoutMode==='single'?'on':''}}" data-mode="single" bindtap="onMode">单排</view>
+      <view class="chip {{layoutMode==='double'?'on':''}}" data-mode="double" bindtap="onMode">双排</view>
+    </view>
+  </view>
+  <view class="block" wx:if="{{layoutMode!=='preset'}}">
+    <view class="label">数量（1–10）</view>
+    <slider min="1" max="10" step="1" value="{{count}}" show-value bindchange="onCount" />
+  </view>
+  <view class="meta">
+    DPI {{dpi}} · 边距 {{marginMm}}mm · 间距 {{gapMm}}mm
+    <view wx:if="{{maxCount!=null}}">当前纸张约可容纳最多 {{maxCount}} 张</view>
+  </view>
+</view>
