@@ -1,0 +1,42 @@
+<view class="page">
+  <view class="banner" wx:if="{{!enabled}}">打印排版入口默认关闭（ENABLE_PRINT_LAYOUT=false）。开启功能开关后可用。</view>
+
+  <block wx:if="{{enabled}}">
+    <view class="toolbar">
+      <view class="btn-ghost" bindtap="choosePhoto">选择已抠图照片</view>
+      <view class="size-label" wx:if="{{photoSize}}">照片：{{photoSize.name}} {{photoSize.pxWidth}}×{{photoSize.pxHeight}}</view>
+    </view>
+
+    <layout-settings
+      paper-id="{{paperId}}"
+      layout-mode="{{layoutMode}}"
+      count="{{count}}"
+      dpi="{{layoutResult.dpi}}"
+      margin-mm="5"
+      gap-mm="3"
+      max-count="{{layoutResult.maxCount}}"
+      bind:change="onSettingsChange"
+    />
+
+    <layout-canvas
+      id="layoutCanvas"
+      layout="{{layoutResult}}"
+      photo-path="{{photoPath}}"
+      fits="{{layoutResult.fits}}"
+      max-count="{{layoutResult.maxCount}}"
+      css-w="{{cssW}}"
+      css-h="{{cssH}}"
+    />
+
+    <view class="footer safe-bottom">
+      <view class="btn-primary {{layoutResult.fits && photoPath ? '' : 'disabled'}}" bindtap="openExport">高清导出</view>
+    </view>
+
+    <export-modal
+      visible="{{exportVisible}}"
+      unlock-token="{{unlockToken}}"
+      bind:close="closeExport"
+      bind:save="onExportSave"
+    />
+  </block>
+</view>

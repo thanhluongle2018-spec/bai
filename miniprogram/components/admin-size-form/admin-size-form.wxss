@@ -1,0 +1,7 @@
+.form { padding: 24rpx; background: #fff; }
+.field { margin-bottom: 16rpx; font-size: 22rpx; color: #5a6b7c; }
+.field input { margin-top: 6rpx; background: #f0f3f7; padding: 14rpx; border-radius: 6rpx; color: #1a2b3c; }
+.row { display: flex; gap: 16rpx; }
+.row .field { flex: 1; }
+.switch-row { display: flex; justify-content: space-between; align-items: center; margin: 16rpx 0; }
+.err { color: #c0392b; margin-bottom: 12rpx; font-size: 24rpx; }

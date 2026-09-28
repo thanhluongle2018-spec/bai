@@ -1,0 +1,17 @@
+<scroll-view scroll-y class="page">
+  <view class="title">用户协议</view>
+  <view class="meta">更新日期：2026-09-28</view>
+  <view class="p">欢迎使用「证件照工具」小程序（下称「本服务」）。使用前请仔细阅读本协议；继续使用即表示您同意本协议全部条款。</view>
+  <view class="h">一、服务内容</view>
+  <view class="p">本服务提供证件照相关的图片上传、裁剪、尺寸选择、背景替换、AI 抠图预览与导出等功能。打印排版等能力可能按功能开关分阶段开放。</view>
+  <view class="h">二、账号与合规</view>
+  <view class="p">您应遵守中华人民共和国法律法规及微信平台规范，不得上传违法、侵权或含他人隐私的内容。因您上传内容引发的纠纷由您自行承担。</view>
+  <view class="h">三、AI 处理说明</view>
+  <view class="p">本服务使用腾讯云人体分析 SegmentPortraitPic 进行 AI 抠图。AI 结果可能存在误差，请您自行核对是否符合办理机构要求。</view>
+  <view class="h">四、广告与高清导出</view>
+  <view class="p">高清导出可能需完整观看激励视频后解锁。未完整观看、跳过、关闭或广告失败时，系统不会解锁本次导出。</view>
+  <view class="h">五、免责</view>
+  <view class="p">因网络、第三方服务、设备兼容性等原因导致的中断或失败，我们将在合理范围内协助排查，但不承担由此产生的间接损失。详见《免责声明》。</view>
+  <view class="h">六、协议变更</view>
+  <view class="p">我们可能更新本协议，更新后以小程序内展示版本为准。</view>
+</scroll-view>

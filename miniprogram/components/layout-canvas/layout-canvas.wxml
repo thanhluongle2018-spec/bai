@@ -1,0 +1,9 @@
+<view class="wrap">
+  <canvas
+    type="2d"
+    id="layoutPreview"
+    class="canvas"
+    style="width:{{cssW}}px;height:{{cssH}}px;"
+  ></canvas>
+  <view class="warn" wx:if="{{!fits}}">当前数量/布局超出纸张，已禁止导出。最大可容纳约 {{maxCount}} 张。</view>
+</view>

@@ -1,0 +1,68 @@
+<view class="editor">
+  <view class="status-bar" wx:if="{{statusMsg}}">{{statusMsg}}</view>
+
+  <block wx:if="{{src}}">
+    <crop-box
+      id="crop"
+      src="{{src}}"
+      aspect="{{aspect}}"
+      image-width="{{imageWidth}}"
+      image-height="{{imageHeight}}"
+      bind:change="onCropChange"
+    />
+
+    <view class="tabs">
+      <view class="tab {{tab==='size'?'on':''}}" data-tab="size" bindtap="switchTab">尺寸</view>
+      <view class="tab {{tab==='color'?'on':''}}" data-tab="color" bindtap="switchTab">背景</view>
+      <view class="tab {{tab==='preview'?'on':''}}" data-tab="preview" bindtap="switchTab">预览</view>
+    </view>
+
+    <view class="panel" wx:if="{{tab==='size'}}">
+      <size-panel
+        sizes="{{sizes}}"
+        selected-id="{{selectedSize.id}}"
+        bind:select="onSizeSelect"
+      />
+    </view>
+
+    <view class="panel" wx:if="{{tab==='color'}}">
+      <color-panel
+        selected-id="{{background.id}}"
+        bind:select="onBgSelect"
+      />
+    </view>
+
+    <view class="panel preview-panel" wx:if="{{tab==='preview'}}">
+      <view class="preview-wrap">
+        <canvas
+          type="2d"
+          id="previewCanvas"
+          class="preview-canvas"
+          style="width:{{previewCssW}}px;height:{{previewCssH}}px;"
+        ></canvas>
+      </view>
+      <view class="preview-meta">
+        {{selectedSize.name}} · {{selectedSize.pxWidth}}×{{selectedSize.pxHeight}}px
+        <text wx:if="{{cutoutFromCache}}"> · 缓存命中</text>
+      </view>
+      <view class="btn-ghost retry" wx:if="{{cutoutError}}" bindtap="retryCutout">抠图失败，点击重试</view>
+    </view>
+
+    <view class="footer safe-bottom">
+      <view class="btn-ghost" bindtap="startCutout" wx:if="{{!cutoutTempUrl}}">AI 抠图</view>
+      <view class="btn-primary" bindtap="openExport" wx:else>高清导出</view>
+    </view>
+  </block>
+
+  <export-modal
+    id="exportModal"
+    visible="{{exportVisible}}"
+    unlock-token="{{unlockToken}}"
+    bind:close="closeExport"
+    bind:save="onExportSave"
+    bind:success="onExportSuccess"
+  />
+
+  <!-- 离屏高清合成 -->
+  <canvas type="2d" id="exportCanvas" class="hidden-canvas"></canvas>
+</view>

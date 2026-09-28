@@ -1,0 +1,25 @@
+<view class="crop-root" bindtouchmove="noop">
+  <view class="stage" style="width:{{stageW}}px;height:{{stageH}}px;">
+    <image
+      class="source"
+      src="{{src}}"
+      mode="aspectFit"
+      style="width:{{imgDisplayW}}px;height:{{imgDisplayH}}px;left:{{imgOffsetX}}px;top:{{imgOffsetY}}px;"
+    />
+    <view class="mask"></view>
+    <view
+      class="box"
+      style="left:{{box.x}}px;top:{{box.y}}px;width:{{box.w}}px;height:{{box.h}}px;"
+      catchtouchstart="onBoxStart"
+      catchtouchmove="onBoxMove"
+      catchtouchend="onBoxEnd"
+    >
+      <view class="grid"></view>
+      <view class="handle tl" data-corner="tl" catchtouchstart="onHandleStart" catchtouchmove="onHandleMove" catchtouchend="onBoxEnd"></view>
+      <view class="handle tr" data-corner="tr" catchtouchstart="onHandleStart" catchtouchmove="onHandleMove" catchtouchend="onBoxEnd"></view>
+      <view class="handle bl" data-corner="bl" catchtouchstart="onHandleStart" catchtouchmove="onHandleMove" catchtouchend="onBoxEnd"></view>
+      <view class="handle br" data-corner="br" catchtouchstart="onHandleStart" catchtouchmove="onHandleMove" catchtouchend="onBoxEnd"></view>
+    </view>
+  </view>
+  <view class="hint">拖动裁剪框，角落可缩放；比例跟随所选尺寸</view>
+</view>

@@ -1,0 +1,19 @@
+<view class="color-panel">
+  <view class="title">背景颜色</view>
+  <view class="grid">
+    <view
+      wx:for="{{colors}}"
+      wx:key="id"
+      class="swatch {{selectedId===item.id?'on':''}}"
+      data-id="{{item.id}}"
+      bindtap="onSelect"
+    >
+      <view
+        class="preview"
+        style="{{item.type==='solid' ? 'background:'+item.color : 'background:linear-gradient(180deg,'+item.topColor+' 0%,'+item.topColor+' 70%,'+item.bottomColor+' 85%,'+item.bottomColor+' 100%)'}}"
+      ></view>
+      <text class="label">{{item.name}}</text>
+    </view>
+  </view>
+  <view class="note" wx:if="{{gradientNote}}">渐变：起点 {{gradientNote.start}}%，过渡 {{gradientNote.range}}%</view>
+</view>

@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "layout-settings": "/components/layout-settings/layout-settings",
+    "layout-canvas": "/components/layout-canvas/layout-canvas",
+    "export-modal": "/components/export-modal/export-modal"
+  },
+  "navigationBarTitleText": "打印排版"
+}

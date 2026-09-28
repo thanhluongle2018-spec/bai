@@ -1,0 +1,11 @@
+{
+  "name": "segment-portrait",
+  "version": "1.0.0",
+  "description": "证件照 AI 抠图：SegmentPortraitPic + 缓存",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3",
+    "tencentcloud-sdk-nodejs": "^4.0.0",
+    "pngjs": "^7.0.0"
+  }
+}

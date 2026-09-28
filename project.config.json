@@ -1,0 +1,35 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "coverView": true,
+    "showShadowRootInWxmlPanel": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "appid": "touristappid",
+  "projectname": "id-photo-tool",
+  "libVersion": "3.5.5",
+  "compileType": "miniprogram",
+  "condition": {},
+  "packOptions": {
+    "ignore": [
+      { "type": "folder", "value": "docs" },
+      { "type": "file", "value": "README.md" }
+    ],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  },
+  "cloudfunctionTemplateRoot": ""
+}

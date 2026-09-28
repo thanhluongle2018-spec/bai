@@ -1,0 +1,74 @@
+<view class="size-panel">
+  <view class="search-row">
+    <input
+      class="search"
+      placeholder="搜索名称 / 分类 / 别名 / 关键词"
+      value="{{keyword}}"
+      bindinput="onSearch"
+      confirm-type="search"
+    />
+  </view>
+
+  <scroll-view scroll-x class="cats" enable-flex>
+    <view
+      class="cat {{activeCategory===''?'on':''}}"
+      data-cat=""
+      bindtap="onCat"
+    >全部</view>
+    <view
+      wx:for="{{categories}}"
+      wx:key="*this"
+      class="cat {{activeCategory===item?'on':''}}"
+      data-cat="{{item}}"
+      bindtap="onCat"
+    >{{item}}</view>
+  </scroll-view>
+
+  <scroll-view scroll-y class="list">
+    <block wx:if="{{filtered.length}}">
+      <view
+        wx:for="{{filtered}}"
+        wx:key="id"
+        class="item {{selectedId===item.id?'on':''}}"
+        data-id="{{item.id}}"
+        bindtap="onSelect"
+      >
+        <view class="name">{{item.name}}</view>
+        <view class="meta">{{item.category}} · {{item.pxWidth}}×{{item.pxHeight}}px
+          <text wx:if="{{item.mmWidth}}"> · {{item.mmWidth}}×{{item.mmHeight}}mm</text>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty">无匹配尺寸</view>
+  </scroll-view>
+
+  <view class="custom">
+    <view class="custom-title">自定义尺寸</view>
+    <view class="row">
+      <view class="field">
+        <text>宽(px)</text>
+        <input type="number" value="{{custom.pxWidth}}" data-key="pxWidth" bindinput="onCustomInput" />
+        <text class="err" wx:if="{{customErrors.pxWidth}}">{{customErrors.pxWidth}}</text>
+      </view>
+      <view class="field">
+        <text>高(px)</text>
+        <input type="number" value="{{custom.pxHeight}}" data-key="pxHeight" bindinput="onCustomInput" />
+        <text class="err" wx:if="{{customErrors.pxHeight}}">{{customErrors.pxHeight}}</text>
+      </view>
+    </view>
+    <view class="row">
+      <view class="field">
+        <text>宽(mm)</text>
+        <input type="digit" value="{{custom.mmWidth}}" data-key="mmWidth" bindinput="onCustomInput" />
+        <text class="err" wx:if="{{customErrors.mmWidth}}">{{customErrors.mmWidth}}</text>
+      </view>
+      <view class="field">
+        <text>高(mm)</text>
+        <input type="digit" value="{{custom.mmHeight}}" data-key="mmHeight" bindinput="onCustomInput" />
+        <text class="err" wx:if="{{customErrors.mmHeight}}">{{customErrors.mmHeight}}</text>
+      </view>
+    </view>
+    <text class="err" wx:if="{{customErrors.total}}">{{customErrors.total}}</text>
+    <view class="btn-apply {{customOk?'':'disabled'}}" bindtap="onApplyCustom">应用自定义</view>
+  </view>
+</view>

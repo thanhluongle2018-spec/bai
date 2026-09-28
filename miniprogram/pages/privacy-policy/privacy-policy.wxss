@@ -1,0 +1,5 @@
+.page { height: 100vh; padding: 40rpx; box-sizing: border-box; background: #f0f3f7; }
+.title { font-family: "Songti SC", Georgia, serif; font-size: 44rpx; font-weight: 700; }
+.meta { margin-top: 8rpx; color: #8a97a5; font-size: 22rpx; }
+.h { margin-top: 36rpx; font-weight: 700; font-size: 30rpx; }
+.p { margin-top: 12rpx; color: #5a6b7c; line-height: 1.7; font-size: 26rpx; white-space: pre-wrap; }

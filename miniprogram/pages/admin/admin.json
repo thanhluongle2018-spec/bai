@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "admin-size-form": "/components/admin-size-form/admin-size-form",
+    "admin-config-form": "/components/admin-config-form/admin-config-form"
+  },
+  "navigationBarTitleText": "管理后台"
+}

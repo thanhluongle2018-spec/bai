@@ -1,0 +1,25 @@
+<view class="form">
+  <view class="field"><text>名称</text><input value="{{form.name}}" data-k="name" bindinput="onInput" /></view>
+  <view class="field"><text>分类</text><input value="{{form.category}}" data-k="category" bindinput="onInput" /></view>
+  <view class="field"><text>别名（逗号分隔）</text><input value="{{form.aliasesText}}" data-k="aliasesText" bindinput="onInput" /></view>
+  <view class="field"><text>关键词（逗号分隔）</text><input value="{{form.keywordsText}}" data-k="keywordsText" bindinput="onInput" /></view>
+  <view class="row">
+    <view class="field"><text>宽 mm</text><input type="digit" value="{{form.mmWidth}}" data-k="mmWidth" bindinput="onInput" /></view>
+    <view class="field"><text>高 mm</text><input type="digit" value="{{form.mmHeight}}" data-k="mmHeight" bindinput="onInput" /></view>
+  </view>
+  <view class="row">
+    <view class="field"><text>宽 px</text><input type="number" value="{{form.pxWidth}}" data-k="pxWidth" bindinput="onInput" /></view>
+    <view class="field"><text>高 px</text><input type="number" value="{{form.pxHeight}}" data-k="pxHeight" bindinput="onInput" /></view>
+  </view>
+  <view class="row">
+    <view class="field"><text>DPI</text><input type="number" value="{{form.dpi}}" data-k="dpi" bindinput="onInput" /></view>
+    <view class="field"><text>排序</text><input type="number" value="{{form.sort}}" data-k="sort" bindinput="onInput" /></view>
+  </view>
+  <view class="field"><text>备注</text><input value="{{form.note}}" data-k="note" bindinput="onInput" /></view>
+  <view class="switch-row">
+    <text>启用</text>
+    <switch checked="{{form.enabled}}" bindchange="onEnabled" />
+  </view>
+  <view class="err" wx:if="{{error}}">{{error}}</view>
+  <view class="btn-primary" bindtap="onSubmit">{{submitting ? '提交中…' : '保存'}}</view>
+</view>

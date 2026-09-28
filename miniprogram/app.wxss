@@ -1,0 +1,46 @@
+page {
+  --color-ink: #1a2b3c;
+  --color-accent: #c45c26;
+  --color-surface: #f0f3f7;
+  --color-panel: #ffffff;
+  --color-muted: #5a6b7c;
+  --color-line: #d5dde6;
+  --font-display: "Songti SC", "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+  --font-body: "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color: #fff;
+  border-radius: 8rpx;
+  padding: 24rpx 40rpx;
+  text-align: center;
+  font-size: 30rpx;
+}
+
+.btn-primary[disabled] {
+  opacity: 0.45;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--color-ink);
+  border: 2rpx solid var(--color-line);
+  border-radius: 8rpx;
+  padding: 22rpx 36rpx;
+  text-align: center;
+}
+
+.link {
+  color: var(--color-accent);
+  text-decoration: underline;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

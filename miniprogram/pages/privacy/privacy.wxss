@@ -1,0 +1,28 @@
+.page {
+  padding: 48rpx 40rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #e8eef5, #f0f3f7);
+}
+
+.title {
+  font-family: "Songti SC", Georgia, serif;
+  font-size: 44rpx;
+  font-weight: 700;
+}
+
+.body {
+  margin-top: 28rpx;
+  color: #5a6b7c;
+  line-height: 1.7;
+  font-size: 28rpx;
+}
+
+.agree {
+  margin-top: 64rpx;
+}
+
+.deny {
+  margin-top: 24rpx;
+  text-align: center;
+}

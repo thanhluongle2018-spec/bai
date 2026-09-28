@@ -1,0 +1,23 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/editor/editor",
+    "pages/privacy/privacy",
+    "pages/user-agreement/user-agreement",
+    "pages/privacy-policy/privacy-policy",
+    "pages/disclaimer/disclaimer",
+    "pages/layout/layout",
+    "pages/admin/admin"
+  ],
+  "window": {
+    "navigationBarTitleText": "证件照工具",
+    "navigationBarBackgroundColor": "#1A2B3C",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#F0F3F7",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "__usePrivacyCheck__": true
+}

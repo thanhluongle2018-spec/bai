@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "crop-box": "/components/crop-box/crop-box",
+    "size-panel": "/components/size-panel/size-panel",
+    "color-panel": "/components/color-panel/color-panel",
+    "export-modal": "/components/export-modal/export-modal"
+  },
+  "navigationBarTitleText": "编辑证件照"
+}

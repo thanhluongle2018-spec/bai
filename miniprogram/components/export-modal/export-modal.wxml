@@ -1,0 +1,25 @@
+<view class="mask" wx:if="{{visible}}" catchtouchmove="noop">
+  <view class="sheet">
+    <view class="title">高清导出</view>
+    <view class="desc">
+      导出前需完整观看激励视频以解锁本次高清保存。跳过、关闭或广告失败将无法解锁。
+    </view>
+    <view class="ai-note">
+      本工具使用腾讯云人体分析（SegmentPortraitPic）进行 AI 抠图，结果仅供参考。详见
+      <text class="link" data-url="/pages/privacy-policy/privacy-policy" bindtap="go">隐私政策</text>
+      与
+      <text class="link" data-url="/pages/disclaimer/disclaimer" bindtap="go">免责声明</text>。
+    </view>
+
+    <view class="status">状态：{{statusText}}</view>
+    <view class="err" wx:if="{{errorMsg}}">{{errorMsg}}</view>
+
+    <view class="actions">
+      <view
+        class="btn primary {{busy?'disabled':''}}"
+        bindtap="onExport"
+      >{{actionText}}</view>
+      <view class="btn ghost" bindtap="onClose">取消</view>
+    </view>
+  </view>
+</view>
