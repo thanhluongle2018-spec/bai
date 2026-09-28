@@ -6,7 +6,7 @@ App({
     featureFlags: flags,
     cloudReady: false,
     // 替换为你的 CloudBase 环境 ID
-    envId: '',
+    envId: 'kangyang-0gstf7ge8e7fb5c1',
     sizesState: {
       list: [],
       version: 0,
