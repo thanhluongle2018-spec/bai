@@ -1,15 +1,25 @@
 /**
  * 导出状态机：
- * idle → checking-ad → showing-ad → unlocked → saving → success/error
- * 仅 isEnded === true 解锁；广告未完整观看或状态变化后不可复用解锁
+ * - ENABLE_REWARD_AD=false：idle → saving → success/error（不创建/加载/展示广告）
+ * - ENABLE_REWARD_AD=true：idle → checking-ad → showing-ad → unlocked → saving → success/error
+ *   仅 isEnded === true 解锁；跳过、关闭、未加载、onError 均不解锁
+ * 是否免广告只由功能开关决定，不得以「广告加载失败」作为免广告条件
  */
+const flags = require('../../config/feature-flags');
 const { showRewardedAd, isAdConfigured } = require('../../utils/ad');
 
-const STATUS_TEXT = {
+const STATUS_TEXT_AD = {
   idle: '待解锁',
   'checking-ad': '检查广告…',
   'showing-ad': '播放广告中…',
   unlocked: '已解锁，准备保存',
+  saving: '正在保存到相册…',
+  success: '已保存',
+  error: '出错，可重试'
+};
+
+const STATUS_TEXT_FREE = {
+  idle: '待保存',
   saving: '正在保存到相册…',
   success: '已保存',
   error: '出错，可重试'
@@ -23,11 +33,12 @@ Component({
   },
 
   data: {
+    rewardAdEnabled: !!flags.ENABLE_REWARD_AD,
     exportState: 'idle',
-    statusText: STATUS_TEXT.idle,
+    statusText: flags.ENABLE_REWARD_AD ? STATUS_TEXT_AD.idle : STATUS_TEXT_FREE.idle,
     errorMsg: '',
     busy: false,
-    actionText: '观看广告并导出',
+    actionText: flags.ENABLE_REWARD_AD ? '观看广告并导出' : '保存到相册',
     _unlockedForToken: ''
   },
 
@@ -52,16 +63,26 @@ Component({
   methods: {
     noop() {},
 
+    isRewardAdEnabled() {
+      return !!flags.ENABLE_REWARD_AD;
+    },
+
     setState(state) {
+      const rewardAdEnabled = this.isRewardAdEnabled();
       const busy = ['checking-ad', 'showing-ad', 'saving'].indexOf(state) !== -1;
-      let actionText = '观看广告并导出';
+      const statusMap = rewardAdEnabled ? STATUS_TEXT_AD : STATUS_TEXT_FREE;
+      let actionText = rewardAdEnabled ? '观看广告并导出' : '保存到相册';
       if (state === 'unlocked') actionText = '保存到相册';
       if (state === 'error') actionText = '重试';
       if (state === 'success') actionText = '完成';
-      if (!isAdConfigured() && state === 'idle') actionText = '广告未配置（无法解锁）';
+      // 仅在开启广告开关时，未配置广告位才提示无法解锁（关闭开关时不要求广告位）
+      if (rewardAdEnabled && !isAdConfigured() && state === 'idle') {
+        actionText = '广告未配置（无法解锁）';
+      }
       this.setData({
+        rewardAdEnabled,
         exportState: state,
-        statusText: STATUS_TEXT[state] || state,
+        statusText: statusMap[state] || state,
         busy,
         actionText
       });
@@ -80,19 +101,27 @@ Component({
       if (this.data.busy) return;
       const token = this.properties.unlockToken || '';
       const state = this.data.exportState;
+      const rewardAdEnabled = this.isRewardAdEnabled();
 
       if (state === 'success') {
         this.triggerEvent('close');
         return;
       }
 
-      // 已解锁且 token 匹配 → 直接保存
-      if (state === 'unlocked' && this.data._unlockedForToken === token) {
-        await this.doSave();
+      // —— 免广告：开关关闭时直接保存，不创建/加载/展示激励视频 ——
+      if (!rewardAdEnabled) {
+        this.setData({ errorMsg: '', _unlockedForToken: token });
+        await this.doSave({ viaAd: false });
         return;
       }
 
-      // 重新走广告
+      // 已解锁且 token 匹配 → 直接保存
+      if (state === 'unlocked' && this.data._unlockedForToken === token) {
+        await this.doSave({ viaAd: true });
+        return;
+      }
+
+      // —— 激励视频流程（保留完整状态机）——
       this.setData({ errorMsg: '' });
       this.setState('checking-ad');
 
@@ -106,6 +135,7 @@ Component({
 
       this.setState('showing-ad');
       const result = await showRewardedAd();
+      // 广告失败/跳过/未加载 → 不解锁；不得据此免广告下载
       if (!(result && result.unlocked === true && result.reason === 'ended')) {
         this.setState('error');
         const map = {
@@ -120,10 +150,11 @@ Component({
 
       this.setData({ _unlockedForToken: token });
       this.setState('unlocked');
-      await this.doSave();
+      await this.doSave({ viaAd: true });
     },
 
-    async doSave() {
+    async doSave(opts) {
+      const viaAd = !!(opts && opts.viaAd);
       this.setState('saving');
       try {
         // 由父页面生成临时文件路径后回调
@@ -141,12 +172,16 @@ Component({
         const msg = (e && e.errMsg) || (e && e.message) || '保存失败';
         // 区分相册权限与广告
         if (/auth deny|authorize|权限/i.test(msg)) {
-          this.setState('error');
+          const hint = viaAd
+            ? '保存相册权限被拒绝，请在设置中授权。这与广告无关，广告已解锁。'
+            : '保存相册权限被拒绝，请在设置中授权。';
           this.setData({
-            errorMsg: '保存相册权限被拒绝，请在设置中授权。这与广告无关，广告已解锁。'
+            errorMsg: hint,
+            exportState: 'unlocked',
+            actionText: '重新保存到相册',
+            busy: false,
+            statusText: viaAd ? STATUS_TEXT_AD.unlocked : '待重新保存'
           });
-          // 保持解锁，允许重试保存
-          this.setData({ exportState: 'unlocked', actionText: '重新保存到相册', busy: false });
           return;
         }
         this.setState('error');

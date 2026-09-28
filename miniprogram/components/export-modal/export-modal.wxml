@@ -1,8 +1,11 @@
 <view class="mask" wx:if="{{visible}}" catchtouchmove="noop">
   <view class="sheet">
     <view class="title">高清导出</view>
-    <view class="desc">
+    <view class="desc" wx:if="{{rewardAdEnabled}}">
       导出前需完整观看激励视频以解锁本次高清保存。跳过、关闭或广告失败将无法解锁。
+    </view>
+    <view class="desc" wx:else>
+      当前版本尚未启用激励视频。点击下方按钮即可将高清证件照保存到相册。
     </view>
     <view class="ai-note">
       本工具使用腾讯云人体分析（SegmentPortraitPic）进行 AI 抠图，结果仅供参考。详见

@@ -13,8 +13,14 @@
    - 上传云存储
    - 调用腾讯云人体分析 AI 抠图
    - 保存到相册
-6. 激励视频广告位 ID 填入 `miniprogram/utils/ad.js` 的 `REWARD_AD_UNIT_ID`。
-7. **流量主开通门槛按微信官方最新要求核实，不要在代码或文档中写死具体门槛数字。**
+6. **激励视频 / 流量主（当前阶段可跳过）**
+   - 初期尚未开通流量主时：保持 `ENABLE_REWARD_AD=false`，**无需配置广告位 ID**；高清导出直接保存。
+   - 开通流量主后：
+     1. 按微信官方最新要求核实开通资格（门槛不在代码或文档中写死）；
+     2. 创建激励视频广告位，将 ID 填入 `miniprogram/utils/ad.js` 的 `REWARD_AD_UNIT_ID`；
+     3. 将 `miniprogram/config/feature-flags.js` 中 `ENABLE_REWARD_AD` 设为 `true`；
+     4. 真机验证：完整观看可导出；跳过/关闭/未加载/onError 均不可解锁。
+   - 是否免广告**只由** `ENABLE_REWARD_AD` 决定，不得以广告加载失败作为免广告条件。
 
 ## 腾讯云人体分析
 
@@ -66,6 +72,7 @@
 
 - `ENABLE_PRINT_LAYOUT=false`（一期）；二期改为 `true`。
 - `ENABLE_AI_WATERMARK=false`；审核要求时开启右下角半透明「AI生成」。
+- `ENABLE_REWARD_AD=false`（当前默认）：关闭时高清导出免广告直接保存，无需广告位；开通流量主后再改为 `true` 并配置广告位。
 - 缓存 TTL：云函数内默认 7 天；请配置云存储生命周期清理过期 `cutouts/`、`uploads/`。
 
 ## 正式文案
