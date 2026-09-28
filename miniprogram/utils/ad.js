@@ -3,9 +3,13 @@
  * 仅当 onClose(res).isEnded === true 才视为完整观看解锁
  * 跳过、关闭、失败、未加载、onError 一律不解锁
  *
- * 广告位 ID 请在微信后台配置后填入；流量主开通门槛按微信最新官方要求核实，不在此写死
+ * 是否走广告由 feature-flags.ENABLE_REWARD_AD 决定（默认 false）。
+ * 本模块仅在开关为 true 时被 export-modal 调用；广告加载失败不得作为免广告下载条件。
+ *
+ * 开通流量主后：将 ENABLE_REWARD_AD 设为 true，并填入广告位 ID。
+ * 流量主开通门槛按微信最新官方要求核实，不在此写死。
  */
-const REWARD_AD_UNIT_ID = ''; // TODO: 替换为真实激励视频广告位 ID
+const REWARD_AD_UNIT_ID = ''; // 开通流量主并启用 ENABLE_REWARD_AD 后填入
 
 let rewardedVideoAd = null;
 let loading = false;

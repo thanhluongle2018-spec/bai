@@ -109,6 +109,23 @@ assert(!secretHit, '前端无腾讯云密钥形态字符串');
 const flags = require('../miniprogram/config/feature-flags.js');
 assert(flags.ENABLE_PRINT_LAYOUT === false, '排版开关默认关闭');
 assert(flags.ENABLE_AI_WATERMARK === false, 'AI 水印默认关闭');
+assert(flags.ENABLE_REWARD_AD === false, '激励视频开关默认关闭');
+
+// 导出组件源码：关闭开关时直接保存，且不以广告失败作为免广告条件
+const exportModalSrc = fs.readFileSync(
+  path.join(__dirname, '../miniprogram/components/export-modal/export-modal.js'),
+  'utf8'
+);
+assert(
+  /ENABLE_REWARD_AD/.test(exportModalSrc) && /isRewardAdEnabled/.test(exportModalSrc),
+  'export-modal 读取 ENABLE_REWARD_AD'
+);
+assert(
+  /不得据此免广告|不得以「广告加载失败」|是否免广告只由功能开关/.test(exportModalSrc)
+    || (exportModalSrc.indexOf('!rewardAdEnabled') !== -1
+      && exportModalSrc.indexOf("result.reason === 'ended'") !== -1),
+  '免广告仅由开关决定，广告失败路径仍不解锁'
+);
 
 if (failed) {
   console.error(`\n${failed} check(s) failed`);

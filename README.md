@@ -30,6 +30,7 @@ docs/                 # 核验、部署、测试、数据模型
 | `ENABLE_PRINT_LAYOUT` | `false` | 一期隐藏排版入口，二期改为 `true` |
 | `ENABLE_AI_WATERMARK` | `false` | AI 可见水印，审核需要时可开 |
 | `ENABLE_ADMIN_ENTRY` | `true` | 是否尝试展示管理入口（真正鉴权在云函数） |
+| `ENABLE_REWARD_AD` | `false` | 激励视频解锁高清导出；初期未开通流量主时关闭，直接保存 |
 
 ## 快速开始
 
@@ -37,7 +38,7 @@ docs/                 # 核验、部署、测试、数据模型
 2. 开通云开发，将环境 ID 写入 `miniprogram/app.js` 的 `globalData.envId`。
 3. 按 `docs/setup-manual.md` 创建集合、索引、权限，部署云函数并配置环境变量。
 4. 在腾讯云开通人体分析，核实免费额度与计费，配置 `CUTOUT_*` 环境变量。
-5. 配置广告位 ID（`miniprogram/utils/ad.js`），流量主资格按微信最新官方规则核实。
+5. 初期无需配置广告位（`ENABLE_REWARD_AD=false`）。开通流量主后配置广告位 ID、将开关设为 `true` 并测试。
 6. 在公众平台配置《用户隐私保护指引》。
 
 ## 云函数
